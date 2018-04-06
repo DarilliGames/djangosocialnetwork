@@ -1,0 +1,79 @@
+{% extends 'home/base.html' %}
+{% load bootstrap_tags %}
+{% block content %}
+    <div class="container-fluid">
+        <div class-"row">
+            <div class="col-sm-12">
+                <div class="col-sm-8" style="background-color: white; border: solid gray 3px; border-radius: 10px;">
+                    <div class="col-sm-6" style="padding-bottom:10px">
+                        
+                        <h2 style="text-align: center"> Hello {{user}}!</h2>
+                        <p style="text-align:center"><a href="{% url 'profile' user.id %}" class="btn btn-success" role="button" aria-pressed="true">View Your Profile</a></p>
+                    </div>
+                    <div class="col-sm-6" style="padding-bottom:10px; border-left: solid 1px gray">
+                        <h3>About You:</h3>
+                        {% if user.uprofile.bio %}
+                        <p>{{user.uprofile.bio}} </p>
+                        {% else %}
+                        <p><a href="{% url 'updateprofile' %}" style="width: 120px" class="btn btn-success" role="button" aria-pressed="true">Add a Bio</a></p>
+                        {% endif %}
+                        {% if user.uprofile.streamkey %}
+                        <h3>Twitch Account:</h3>
+                        <p>{{user.uprofile.streamkey}}</p>
+                        {% else %}
+                        <a href="{% url 'updateprofile' %}" style="width: 120px" class="btn btn-success" role="button" aria-pressed="true">Twitch account?</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-sm-4" style="background-color: red; padding: 10px; border: solid gray 3px; border-radius: 10px;">
+                    <div class="col-sm-12" style="padding-bottom:10px; background-color: red; padding: 10px; border: solid gray 3px; border-radius: 10px;">
+                        <p style="background-color:white; border-radius:5px;"><a href="{% url 'updateprofile' %}" style="width: 80px" class="btn btn-success" role="button" aria-pressed="true">Edit</a> Update Profile or add a Twitch Channel </p>
+                        <p style="background-color:white; border-radius:5px;"><a href="{% url 'logout' %}" style="width: 80px" class="btn btn-primary" role="button" aria-pressed="true">Log Out</a> Retire for the night</p>
+                        <p style="background-color:white; border-radius:5px;"><a href="{% url 'deleteaccount' user.id %}" style="width: 80px" class="btn btn-danger" role="button" aria-pressed="true">Delete</a> Remove Your Account</p>
+                    </div>
+                    <div class="col-sm-12" style="padding-bottom:10px; background-color: red; padding: 10px; border: solid gray 3px; border-radius: 10px;">
+                        <h3 style="background-color:white; text-align:center; border-radius:10px;">Notifications</h3>
+                        {% if totalnotification > 0 %}
+                        {% for n in callowed.all %}
+                        <div class="col-sm-6" style="background-color:white; border-radius:5px;">
+                            <p style="background-color:white; border-radius:5px;"><a style="background-color:white; border-radius:5px;" href="{% url 'pget' n.creator.id %}">{{n.creator}} and You</a></p>
+                        </div>
+                        {% endfor %}
+                 
+                 
+                        {% for n in cauthor.all %}
+                        <div class="col-sm-6" style="background-color:white; border-radius:5px;">
+                            <p style="background-color:white; border-radius:5px;"><a style="background-color:white; border-radius:5px;" href="{% url 'pget' n.allowed.id %}">{{n.allowed}} and You</a></p>
+                        </div>
+                        {% endfor %}
+                        
+                        
+                        
+                        {% for n in unread.all %}
+                        <div class="col-sm-6 cardin" style="background-color: red; padding: 10px; border: solid gray 3px; border-radius: 10px;">
+                            <p style="background-color:white; border-radius:5px;"><a style="background-color:white; border-radius:5px;" href="{% url 'mail' n.id %}">{{n.sender}}</a></p>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p style="text-align: center; background-color: white; border-radius:3px">No New Notifications :( </p>
+                        {% endif %}
+                    </div>
+                </div>
+               <div style="background-color:white; width:100px">
+                   
+            {% for c in characters %}
+            {{c.character}}
+            {{c.game}}
+            {{c.rank}}
+            {% endfor %}
+     </div>
+            </div>
+        </div>
+ 
+        <div class="container-fluid">
+            <div class="row">
+                <div></div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

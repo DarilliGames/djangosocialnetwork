@@ -1,0 +1,14 @@
+{% extends 'home/base.html' %}
+{% load bootstrap_tags %}
+{% block content %}
+
+    <div class="row">
+        {% for p in profiles %}
+        <div class="col-sm-2">
+            <div class="cardout" style="text-align:center">
+                <h1 class="cardin" style="text-align:center"><a href="{% url 'profile' p.id%}"style="text-align:center">{{p}}</a></h1>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

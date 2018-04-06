@@ -1,0 +1,36 @@
+body{
+    padding-top: 70px;
+    background-color: #ACBDBA;
+}
+h1{
+    color: #3D3E3D;
+    text-align: center;
+}
+p{
+    color: #3D3E3D;
+}
+
+@media only screen and (max-width: 1600px) {
+    .overallbody{
+        min-height: 650px;
+    }
+    
+}
+
+@media only screen and (max-width: 600px) {
+    .overallbody{
+        min-height: 1000px;
+    }
+    
+}
+
+.cardout{
+    background-color: gray;
+    border: solid black 3px;
+    padding: 5px;
+}
+
+.cardin{
+    background-color: white;
+}
+

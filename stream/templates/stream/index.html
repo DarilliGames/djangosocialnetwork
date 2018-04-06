@@ -1,0 +1,26 @@
+{% extends 'home/base.html' %}
+
+{% load staticfiles %}
+{% block content %}
+<row>
+    <div class="col-sm-12 cardout">
+        {% for s in streams %}
+        <div class="col-sm-3 cardout">
+            <div>
+                
+            <a href="{% url 'stream' s.id %}"><div class="cardout">
+            <iframe
+                src="http://player.twitch.tv/?channel={{s.streamkey}}&muted=true&autoplay=false"
+                height="300"
+                width="100%"
+                frameborder="10"
+                scrolling="no"
+                allowfullscreen="true">
+            </iframe>
+            <div class="cardin" style="text-align:center"><p>{{s}} playing {{s.game}}</p></div>
+            
+            </div></div></div></a>
+        {% endfor %}
+    </div>
+</row>
+{% endblock %}

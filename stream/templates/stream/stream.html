@@ -1,0 +1,23 @@
+{% extends 'home/base.html' %}
+
+{% load staticfiles %}
+{% block content %}
+<row>
+    <div class="col-sm-12 cardout">
+        <div="col-sm-6">
+        <iframe
+            src="http://player.twitch.tv/?channel={{stream.streamkey}}&muted=true"
+            width="720px"
+            height="400px"
+            frameborder="10"
+            scrolling="no"
+            allowfullscreen="true">
+        </iframe>
+        </div>
+        <div="col-sm-6">
+        {{stream}}
+        </div>
+        
+    </div>
+</row>
+{% endblock %}

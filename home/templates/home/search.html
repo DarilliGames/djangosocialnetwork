@@ -1,0 +1,58 @@
+{% extends 'home/base.html' %}
+{% load bootstrap_tags %}
+{% block content %}
+    <h3><a href="#sgame">Games</a> / <a href="#sprofiles">Profiles</a> / <a href="#spublisher">Publishers</a></h3>
+    {% if games %}
+    <div id="sgame" class="row">
+        <h1>Games</h1>
+        {% for p in games %}
+        <div class="col-sm-2">
+            <div class="cardout" style="text-align:center">
+                <div style="width:100%; height:180px; background-color:white"></div>
+                <h4 class="cardin" style="text-align:center"><a href="{% url 'profile' p.id%}"style="text-align:center">{{p}}</a></h4>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if profiles %}
+    <div id="sprofiles" class="row">
+        <h1>Users</h1>
+        {% for p in profiles %}
+        <div class="col-sm-2">
+            <div class="cardout" style="text-align:center">
+                <div style="width:100%; height:180px; background-color:white"></div>
+                <h4 class="cardin" style="text-align:center"><a href="{% url 'profile' p.id%}"style="text-align:center">{{p}}</a></h4>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if characters %}
+    <div id="sprofiles" class="row">
+        <h1>Game Characters</h1>
+        {% for p in characters %}
+        <div class="col-sm-2">
+            <div class="cardout" style="text-align:center">
+                <div style="width:100%; height:180px; background-color:white"></div>
+                <h4 class="cardin" style="text-align:center"><a href="{% url 'profile' p.id%}"style="text-align:center">{{p}}</a></h4>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if publisher %}
+    <div id="spublisher" class="row">
+        <h1>Publishers</h1>
+        {% for p in publisher %}
+        <div class="col-sm-2">
+            <div class="cardout" style="text-align:center">
+                <div style="width:100%; height:180px; background-color:white"></div>
+                <h4 class="cardin" style="text-align:center"><a href="{% url 'profile' p.id%}"style="text-align:center">{{p}}</a></h4>
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+{% endblock %}

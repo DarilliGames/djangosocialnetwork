@@ -26,7 +26,7 @@ SECRET_KEY = str(os.environ.get('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['djangonetwork-smoody.c9users.io']
+ALLOWED_HOSTS = ['djangonetwork-smoody.c9users.io', 'gbrand-network.herokuapp.com']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 

@@ -16,6 +16,8 @@ def get_mail(request, id):
     if (request.user == mail.sender):
         return render(request, "mbox/mail.html", {"mail" : mail})
     elif (request.user == mail.recipient):
+        mail.read = True
+        mail.save()
         return render(request, "mbox/mail.html", {"mail" : mail})
     else:
         return redirect("index")

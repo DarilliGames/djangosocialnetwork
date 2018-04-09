@@ -6,6 +6,14 @@ h1{
     color: #3D3E3D;
     text-align: center;
 }
+h2{
+    color: #3D3E3D;
+    text-align: center;
+}
+h3{
+    color: #3D3E3D;
+    text-align: center;
+}
 p{
     color: #3D3E3D;
 }
@@ -34,6 +42,15 @@ p{
     background-color: white;
     height: 100%;
 }
+.contained{
+    background-color: white;
+    height: 100%;
+    border: solid black 3px;
+    padding: 5px;
+    border-radius: 5px;
+    
+}
+
 
 .cardmidalign {
   display: inline-block;

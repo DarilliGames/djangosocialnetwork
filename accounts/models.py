@@ -15,7 +15,7 @@ class UserProfile(models.Model):
     last_online = models.DateField(auto_now_add=True)
     
     def __str__(self):
-        return self.user
+        return self.user.username
         
     
         

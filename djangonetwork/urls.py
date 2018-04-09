@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.static import serve
+from django.conf import settings
 
 from home.views import get_index, search
 from accounts import urls as accounts_urls
@@ -35,5 +37,6 @@ urlpatterns = [
     url(r'^chatroom/', include(chatroom_urls)),
     url(r'^games/', include(games_urls)),
     url(r'^stream/', include(stream_urls)),
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT})
 ]
 

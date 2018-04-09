@@ -10,13 +10,13 @@
     
     <row>
             
-        {% for user in users %}
+        {% for f in featured %}
         <div class="col-sm-4">
         <a href="{% url 'profile' user.id %}"><div class="cardout" style="height:400px;">
             <div class="cardin" style="height:350px;">
                 <div style="background-color:red; width:100%; height: 275px"></div>
                 <div style="text-align:center;">
-                    <h1>{{ user.username }}</h1>
+                    <h1>{{ f.user }}</h1>
                     <p style="display: inline-block; width: 100px; background-color: gold; padding:5px; margin: 5px; position: relative; top: -140px; right:-180px; border-radius:50%; text-align:center; color: black;"> PREMIUM USER </p>
             
                 </div>

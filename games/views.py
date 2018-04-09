@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
+from .forms import *
 # Create your views here.
 def Home(request):
     games = Game.objects.all()
@@ -15,3 +16,13 @@ def get_publisher(request, id):
     games = Game.objects.filter(publisher=publisher)
     return render(request, "games/publisher.html", {"publisher" : publisher, "games":games})
     
+    
+def add_game(request):
+    if request.method=="POST":
+        form = GameForm(request.POST)
+        game = form.save(commit=False)
+        game.save()
+        return redirect("yourprofile")
+
+    gameform = GameForm()
+    return render(request, "games/createnew.html", {"gameform":gameform})

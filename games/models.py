@@ -19,7 +19,8 @@ class Game(models.Model):
     blurb = models.TextField(max_length=140, blank=True)
     bio = models.TextField(max_length=800, blank=True)
     release_date = models.DateTimeField()
-    
+    img_thumbnail = models.ImageField(blank=True, upload_to='images')
+    img_tall = models.ImageField(blank=True, upload_to='images')
     reviews_num = models.IntegerField()
     reviews_score = models.IntegerField()
     

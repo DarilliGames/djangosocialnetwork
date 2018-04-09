@@ -1,10 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from games.models import *
-from accounts.models import CharacterProfile
+from accounts.models import *
 
 def get_index(request):
-    return render(request, "home/index.html")
+    featured = []
+    for x in UserProfile.objects.all():
+        if x.is_featured:
+            featured.append(x)
+    return render(request, "home/index.html", {"featured":featured})
     
 def search(request):
     profiles = User.objects.filter(username__icontains=request.GET.get("query"))

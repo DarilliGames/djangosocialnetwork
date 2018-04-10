@@ -4,6 +4,7 @@ from games.models import *
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="uprofile")
+    playing_game = models.ForeignKey(Game, null=True, blank=True, on_delete=models.CASCADE, related_name="streamers")
     header = models.CharField(max_length=200, blank=True)
     bio = models.TextField()
     is_youtube = models.BooleanField(default=False)
@@ -16,8 +17,6 @@ class UserProfile(models.Model):
     
     def __str__(self):
         return self.user.username
-        
-    
         
 class CharacterProfile(models.Model):
     

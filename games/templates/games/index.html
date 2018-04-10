@@ -6,11 +6,11 @@
     <div class="col-sm-12 cardout">
         <br>
         {% for g in games %}
-        <a href="{% url 'game' g.publisher.id %}"><div class="col-sm-2 cardin">
-            <h3>{{g}}</h3>
+        <div class="col-sm-2 cardin">
+            <h3><a href="{% url 'game' g.id %}">{{g}}</a></h3>
             <img src="{{ MEDIA_URL }}{{ g.img_thumbnail }}" style="max-height:100%; max-width:100%"/>
             <p>{{g.blurb}}</p>
-            <p><a href"{% url 'publisher' g.publisher.id %}">{{g.publisher}}</a></p>
+            <p><a href="{% url 'publisher' g.publisher.id %}">{{g.publisher}}</a></p>
             <div>
             {% if g.reviews_num > 0 %}
                         <i style="color:gold" class="fa fa-star"></i>
@@ -24,9 +24,11 @@
                         <p>This Item Has Not Been Reviewed</p>
                         {% endif %}
             </div>
-        </div></a>
+        </div>
         {% endfor %}
+        
     </div>
+
 </row>
 {% endblock %}
 

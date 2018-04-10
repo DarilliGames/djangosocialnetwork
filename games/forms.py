@@ -4,7 +4,7 @@ from .models import *
 class PublisherForm(forms.ModelForm):
     class Meta:
         model = Publisher
-        fields = ('name', 'blurb', 'bio', 'contact')
+        fields = ('name', 'blurb', 'bio', 'contact', 'img_logo')
         
  
 
@@ -12,4 +12,4 @@ class PublisherForm(forms.ModelForm):
 class GameForm(forms.ModelForm):
     class Meta:
         model = Game
-        fields = ('name', 'blurb', 'bio', 'release_date', 'img_thumbnail')
+        fields = ('name', 'publisher', 'blurb', 'bio', 'img_thumbnail', 'img_tall')

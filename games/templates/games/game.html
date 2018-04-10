@@ -1,39 +1,97 @@
 {% extends 'home/base.html' %}
-
+{% load bootstrap_tags %}
 {% load staticfiles %}
 {% block content %}
 <div class="container">
     <div class="row">
         <div class="col-sm-12 cardout">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="col-sm-12">
                     <img src="{{ MEDIA_URL }}{{ game.img_tall }}" style="max-height:500px; max-width:500px"/>
-                    
-                    {% if game.reviews_num > 0 %}
-                    <i style="color:gold" class="fa fa-star"></i>
-                    <i {% if game.average_rating > 1.5 %} style="color:gold" {% endif %} class="fa fa-star"></i>
-                    <i {% if game.average_rating > 2.5 %} style="color:gold" {% endif %} class="fa fa-star"></i>
-                    <i {% if game.average_rating > 3.5 %} style="color:gold" {% endif %} class="fa fa-star"></i>
-                    <i {% if game.average_rating > 4.5 %} style="color:gold" {% endif %} class="fa fa-star"></i>
-                    
-                    <p>Average Rating: {{game.average_rating|floatformat:"1" }}/5 Reviews: {{ game.reviews_num }}</p>
+                    <div class="row">
+                        {% if game.reviews_num > 0 %}
+                        <div class="col-sm-9" style="text-align:center">
+                            <i style="color:gold" class="fa fa-star"></i><i {% if game.average_rating > 1.5 %} style="color:gold" {% endif %} class="fa fa-star"></i><i {% if game.average_rating > 2.5 %} style="color:gold" {% endif %} class="fa fa-star"></i><i {% if game.average_rating > 3.5 %} style="color:gold" {% endif %} class="fa fa-star"></i><i {% if game.average_rating > 4.5 %} style="color:gold" {% endif %} class="fa fa-star"></i>
+                            <p>Average Rating: {{game.average_rating|floatformat:"1" }}/5 Reviews: {{ game.reviews_num }}</p>
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Review</button></a></p>
+                         </div>
+                   
                     {% else %}
-                    <p>This Item Has Not Been Reviewed</p>
+                    <p>This Item Has Not Been Reviewed <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Review</button></p>
                     {% endif %}
+                    
+                    </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Review {{game}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'reviewgame' game.id %}">
+                {% csrf_token %}
+                {{ form | as_bootstrap }}
+                <button id="1" onmouseover="mouseOver(1)" onmouseout="mouseOut(1)" type="submit" name="score" value="1"><i id="s1" style="color:gold;" class="fa fa-star"></i></button>
+                <button id="2" onmouseover="mouseOver(2)" onmouseout="mouseOut(2)" type="submit" name="score" value="2"><i id="s2" {% if game.average_rating > 1.5 %} style="color:gold" {% endif %} class="fa fa-star"></i></button>
+                <button id="3" onmouseover="mouseOver(3)" onmouseout="mouseOut(3)" type="submit" name="score" value="3"><i id="s3" {% if game.average_rating > 2.5 %} style="color:gold" {% endif %} class="fa fa-star"></i></button>
+                <button id="4" onmouseover="mouseOver(4)" onmouseout="mouseOut(4)" type="submit" name="score" value="4"><i id="s4" {% if game.average_rating > 3.5 %} style="color:gold" {% endif %} class="fa fa-star"></i></button>
+                <button id="4" onmouseover="mouseOver(5)" onmouseout="mouseOut(5)" type="submit" name="score" value="5"><i id="s5" {% if game.average_rating > 4.5 %} style="color:gold" {% endif %} class="fa fa-star"></i></button>
+                
+            </form>
+                {% else %}
+                <h2>Login to leave a review</h2>
+                {% endif %}
+      </div>
+      <div class="modal-footer">
+        <p>Select a Star to Submit or <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></p>
+        
+      </div>
+    </div>
+  </div>
+</div>
                     
                 </div>
             </div>
                 
-            <div class="col-sm-6">
+            <div class="col-sm-8">
                 <h1 class="contained">{{ game }}</h1>
                 <div class="contained">
                 <h3>{{ game.bio }}</h3>
                 <p>{{ game.blurb }}</p>
-                <p>Find Your Partner Now!</p>
+                <p><a href="{% url 'scharacters' %}">Find Your Partner Now!</a></p>
                 </div>
             </div>
             </div>
         </div>
     </div>
 </div>
+
+
+    <script>
+   
+    function mouseOver(id) {
+        let x = 1;
+        let y = id;
+        for (x; x <= y; x++) {
+            document.getElementById("s"+x).style = ("color:gold");
+        }
+
+
+    }
+    function mouseOut(id) {
+        let x = 1;
+        let y = id;
+        for (x; x <= y; x++) {
+            document.getElementById("s"+x).style = ("color:dimgray");
+        }
+    }
+
+    </script>
 {% endblock %}

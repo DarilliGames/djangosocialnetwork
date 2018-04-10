@@ -1,21 +1,21 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
-# Create your views here.
+from review.forms import GameReviewForm
+
 def Home(request):
     games = Game.objects.all()
     return render(request, "games/index.html", {"games":games})
     
 def get_game(request, id):
     game = get_object_or_404(Game, pk=id)
-    return render(request, "games/game.html", {"game":game})
+    form = GameReviewForm()
+    return render(request, "games/game.html", {"game":game, "form":form})
     
 def get_publisher(request, id):
     publisher = get_object_or_404(Publisher, pk=id)
-    print(publisher)
     games = Game.objects.filter(publisher=publisher)
     return render(request, "games/publisher.html", {"publisher" : publisher, "games":games})
-    
     
 def add_game(request):
     if request.method=="POST":
@@ -23,6 +23,15 @@ def add_game(request):
         game = form.save(commit=False)
         game.save()
         return redirect("yourprofile")
-
     gameform = GameForm()
+    return render(request, "games/createnew.html", {"gameform":gameform})
+    
+def add_publisher(request):
+    if request.method=="POST":
+        form = PublisherForm(request.POST)
+        game = form.save(commit=False)
+        game.publisheradmin = request.user
+        game.save()
+        return redirect("yourprofile")
+    gameform = PublisherForm()
     return render(request, "games/createnew.html", {"gameform":gameform})

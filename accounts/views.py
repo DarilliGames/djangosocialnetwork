@@ -72,6 +72,8 @@ def yourprofile(request):
 def profile(request, id):
     person = get_object_or_404(User, pk=id)
     characters = CharacterProfile.objects.filter(userprofile=person)
+    for c in characters:
+        c.rank = get_rank(c.game, c.rank)
     if Follow.objects.filter(follower=request.user, followed=person):
         followstatus = True
     else:
@@ -110,7 +112,7 @@ def remove_profile(request, id):
 def update_profile(request):
     if request.method=="POST":
         form = ProfileForm(request.POST)
-        if request.user.uprofile:
+        if UserProfile.objects.filter(user=request.user):
             upro = request.user.uprofile
             upro.bio=request.POST.get('bio')
             upro.streamkey=request.POST.get('streamkey')
@@ -123,7 +125,7 @@ def update_profile(request):
             upro.save()
             return render(request, "accounts/update.html", {"form":form})
     
-    if request.user.uprofile:
+    if UserProfile.objects.filter(user=request.user):
         form = ProfileForm(instance=request.user.uprofile)
     else:
         form = ProfileForm()

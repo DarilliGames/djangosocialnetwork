@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'chatroom',
     'games',
     'stream',
+    'review',
+    'search',
 ]
 
 MIDDLEWARE_CLASSES = [

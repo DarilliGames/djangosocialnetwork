@@ -50,7 +50,7 @@ class UserRegistrationForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('bio', 'streamkey')
+        fields = ('header', 'bio', 'streamkey', 'playing_game')
         
         
 class CharacterProfileForm(forms.ModelForm):

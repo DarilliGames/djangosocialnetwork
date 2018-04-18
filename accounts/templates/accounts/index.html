@@ -1,7 +1,9 @@
 {% extends 'home/base.html' %}
 {% load bootstrap_tags %}
 {% block content %}
-
+    <div class="container wrapper">
+        
+    
     <div class="row">
         {% for p in profiles %}
         <div class="col-sm-2">
@@ -10,5 +12,6 @@
             </div>
         </div>
         {% endfor %}
+    </div>
     </div>
 {% endblock %}

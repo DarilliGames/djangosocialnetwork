@@ -9,24 +9,6 @@ from .forms import *
 from .models import *
 from follow.models import Follow
 
-league_ranks = { 0:"Unranked", 1:"Bronze 3 or less", 2:"Bronze 1", 3:"Silver 3", 4:"Silver 1", 5:"Gold 3", 6:"Gold 1", 7:"Platinum 3", 8:"Platinum 1", 9:"Diamond 3", 10:"Diamond 1", 11:"Masters", 12:"Challenger"}
-
-
-wow_ranks = { 0: "Unranked", 1:"<1200", 2:"1200-1600", 3:"1600-1800", 4:"1800-2000", 5:"2000-2200", 6:"2200-2400", 7:"2400-2600", 8:"2600-2800", 9:"2800+"}
-
-# { 0: "Unranked", 1:"", 2:"", 3:"", 4:"", 5:"", 6:"", 7:"", 8:"", 9:"", 10:"", 11:"", 12:""}
-
-
-
-def get_rank(game, rank):
-    if game.id == 1:
-        return league_ranks[rank]
-    if game.id == 2:
-        return wow_ranks[rank]
-    else:
-        return str(rank)
-    
-    
     
 def get_index(request):
     profiles = User.objects.all()
@@ -64,18 +46,17 @@ def login(request):
 @login_required()
 def yourprofile(request):
     characters = CharacterProfile.objects.filter(userprofile=request.user)
-    for c in characters:
-        c.rank = get_rank(c.game, c.rank)
     return render(request, 'accounts/yourprofile.html', {"characters":characters})
     
     
 def profile(request, id):
     person = get_object_or_404(User, pk=id)
     characters = CharacterProfile.objects.filter(userprofile=person)
-    for c in characters:
-        c.rank = get_rank(c.game, c.rank)
-    if Follow.objects.filter(follower=request.user, followed=person):
-        followstatus = True
+    if request.user.is_authenticated:
+        if Follow.objects.filter(follower=request.user, followed=person):
+            followstatus = True
+        else:
+            followstatus = False
     else:
         followstatus = False
     return render(request, 'accounts/profile.html', {"person":person, "followstatus":followstatus, "characters":characters})
@@ -108,13 +89,24 @@ def remove_profile(request, id):
         profile.delete()
     return redirect('home')
 
+@login_required()
+def set_main(request, id):
+    character = get_object_or_404(CharacterProfile, pk=id)
+    if request.user == character.userprofile:
+        profile = get_object_or_404(UserProfile, user=request.user)
+        profile.main_character = character
+    profile.save()
+    return redirect("yourprofile")
+    
 
+@login_required()
 def update_profile(request):
     if request.method=="POST":
         form = ProfileForm(request.POST)
         if UserProfile.objects.filter(user=request.user):
             upro = request.user.uprofile
             upro.bio=request.POST.get('bio')
+            upro.img_profile=request.POST.get('img_profile')
             upro.streamkey=request.POST.get('streamkey')
             upro.save()
             return redirect("yourprofile")
@@ -122,6 +114,7 @@ def update_profile(request):
             upro = form.save(commit=False)
             upro.user = request.user
             upro.last_online = timezone.now()
+            upro.img_profile=request.POST.get('img_profile')
             upro.save()
             return render(request, "accounts/update.html", {"form":form})
     
@@ -131,6 +124,35 @@ def update_profile(request):
         form = ProfileForm()
     return render(request, "accounts/update.html", {"form":form})
 
+def update_character(request, id):
+    character = get_object_or_404(CharacterProfile, pk=id)
+    game = character.game
+    attributes = Attributes.objects.filter(game=game)
+    
+    if character.userprofile == request.user:
+        if request.method=="POST":
+            for r in attributes:
+                print(r)
+                print(request.POST.get(r.name))
+                result = AttributeChoices.objects.get(name__attribute=r, character=character)
+                if result:
+                    print("got and saving")
+                    result.name = AttributeValue(pk=int(request.POST.get(r.name)))
+                else:
+                    print("not and saving")
+                    result = AttributeChoices()
+                    result.name = AttributeValue(pk=int(request.POST.get(r.name)))
+                    result.character=character
+                result.save()
+                
+            return redirect('yourprofile')
+        return render(request, "accounts/updatecharacter.html", {"character":character, "attributes":attributes})
+        
+        
+        
+    else:
+        return redirect('home')
+@login_required()
 def create_character(request):
     if request.method=="POST":
         form = CharacterProfileForm(request.POST)

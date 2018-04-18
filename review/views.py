@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from games.models import Game
 from .models import GameReview
 from .forms import GameReviewForm
 # Create your views here.
 
+@login_required()
 def review_game(request, id):
     if request.method == "POST":
         score = int(request.POST.get("score"))

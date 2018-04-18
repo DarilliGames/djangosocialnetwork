@@ -2,12 +2,11 @@
 {% load bootstrap_tags %}
 {% load staticfiles %}
 {% block content %}
-<div class="container">
     <div class="row">
         <div class="col-sm-12 cardout">
             <div class="col-sm-4">
                 <div class="col-sm-12">
-                    <img src="{{ MEDIA_URL }}{{ game.img_tall }}" style="max-height:500px; max-width:500px"/>
+                    <img src="{{ MEDIA_URL }}{{ game.img_tall }}" style="max-height:500px; max-width:400px"/>
                     <div class="row">
                         {% if game.reviews_num > 0 %}
                         <div class="col-sm-9" style="text-align:center">
@@ -65,7 +64,7 @@
                 <div class="contained">
                 <h3>{{ game.bio }}</h3>
                 <p>{{ game.blurb }}</p>
-                <p><a href="{% url 'scharacters' %}">Find Your Partner Now!</a></p>
+                <p><a href="{% url 'scharacters' game.id %}">Find Your Partner Now!</a></p>
                 </div>
             </div>
             </div>

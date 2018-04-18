@@ -8,13 +8,14 @@
     <title>AuthenticateMe</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cerulean/bootstrap.min.css">
-    {% load static %}
+    
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'home/style.css' %}" />
+    {% load static %}
     {% block head_js %}
     {% endblock head_js %}
 
@@ -45,7 +46,7 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="home">Search
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li style="text-align:center; border-bottom: solid gray 1px"><a href="{% url 'scharacters' %}">Characters</a></li>
+                            <li style="text-align:center; border-bottom: solid gray 1px"><a href="{% url 'sgames' %}">Characters</a></li>
                             <li style="text-align:center; border-bottom: solid gray 1px"><a href="{% url 'susers' %}">User</a></li>
                             <li style="text-align:center; border-bottom: solid gray 1px"><a href="{% url 'sgames' %}">Games</a></li>
                             <form role="search" action="{% url 'search' %}">
@@ -75,8 +76,7 @@
         </div>
     {% endif %}
     
-    <div class="container-fluid overallbody">
-        
+    <div class="container wrapper overallbody">
         
         {% block content %} {% endblock %}
         

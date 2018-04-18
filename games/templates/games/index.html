@@ -3,15 +3,23 @@
 {% load staticfiles %}
 {% block content %}
 <row>
-    <div class="col-sm-12 cardout">
-        <br>
-        {% for g in games %}
-        <div class="col-sm-2 cardin">
-            <h3><a href="{% url 'game' g.id %}">{{g}}</a></h3>
-            <img src="{{ MEDIA_URL }}{{ g.img_thumbnail }}" style="max-height:100%; max-width:100%"/>
-            <p>{{g.blurb}}</p>
-            <p><a href="{% url 'publisher' g.publisher.id %}">{{g.publisher}}</a></p>
-            <div>
+   
+      {% for g in games %}
+        <div class="col-sm-2 col-xs-6 gameblock">
+            
+                <h3 class="gametitle"><a href="{% url 'game' g.id %}">{{g}}</a></h3>
+            <div class="tohover">
+            <img class="hoverover" src="{{ MEDIA_URL }}{{ g.img_thumbnail }}" style="max-height:100%; max-width:100%"/>
+            
+            
+            <div class="overlay">
+                
+                    <a href="{% url 'publisher' g.publisher.id %}">{{g.publisher}}</a>
+            </div>
+            </div>
+            
+            
+            <div class="gamerate">
             {% if g.reviews_num > 0 %}
                         <i style="color:gold" class="fa fa-star"></i>
                         <i {% if g.average_rating > 1.5 %} style="color:gold" {% endif %} class="fa fa-star"></i>
@@ -19,15 +27,14 @@
                         <i {% if g.average_rating > 3.5 %} style="color:gold" {% endif %} class="fa fa-star"></i>
                         <i {% if g.average_rating > 4.5 %} style="color:gold" {% endif %} class="fa fa-star"></i>
                         
-                        <p>Average Rating: {{g.average_rating|floatformat:"1" }}/5 Reviews: {{ g.reviews_num }}</p>
+                        <p>{{g.average_rating|floatformat:"1" }}/5.0</p>
                         {% else %}
                         <p>This Item Has Not Been Reviewed</p>
                         {% endif %}
             </div>
+        
         </div>
         {% endfor %}
-        
-    </div>
 
 </row>
 {% endblock %}

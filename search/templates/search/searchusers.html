@@ -6,14 +6,15 @@
 <div class="container">
     <div class="row">
         
-            <form role="search" method="POST" autocomplete="off" action="{% url 'scharacters' %}">
+            <form role="search" method="POST" autocomplete="off">
                 {% csrf_token %}
                 <div  class="col-sm-3 autocomplete">
-                <input id="myInput" class="form-control" type="text" name="gamequery" placeholder="Game">
+                <input id="myInput" class="form-control" style="width:100%;" type="text" name="gamequery" placeholder="Game">
                 </div>
                 <div  class="col-sm-3">
-                <input type="text" class="form-control" style="width:300px;" placeholder="User Name" name="query">
+                <input type="text" class="form-control" style="width:100%;" placeholder="User Name" name="query">
                 </div>
+                
                 <div  class="col-sm-3">
                 <button class="btn btn-light" type="submit">Lets go! <i class="fa fa-search"></i></button>
                 </div>
@@ -27,16 +28,18 @@
         <thead>
         <tr>
         
-        <th scope="col">Character</th>
-        <th scope="col">Rank</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Character: </th>
+        <th scope="col">Rank: </th>
+        <th scope="col">About: {% for x in game.attributes.all %}{{x.name}}{% endfor %}</th>
+        <th scope="col">Handle: </th>
         </tr>
         </thead>
         <tbody>
         {% for c in characters %}
         <tr>
         <td class="table-light"><a href="{% url 'profile' c.userprofile.id %}">{{c}}</a></td>
-        <td class="table-light"><a href="{% url 'profile' c.userprofile.id %}">{{c.rank}}</a></td>
+        <td class="table-light"><a href="{% url 'profile' c.userprofile.id %}">{{c.get_rank}}</a></td>
+        <td class="table-light"><a href="{% url 'profile' c.userprofile.id %}">{% for x in c.abouts.all %}{{ x }} {% endfor %}</a></td>
         <td class="table-light"><a href="{% url 'profile' c.userprofile.id %}">{{c.userprofile}}</a></td>
         </tr>
         {% endfor %}
@@ -48,7 +51,30 @@
     
 </div>
     <script>
-    var counts = {{games|safe}};
+   
+    var games_list = {{games|safe}};
+    
+    
+    
+    
+    function update_select(){
+      var i;
+      var x = document.getElementById("attribute");
+      
+      for (i = 0; i < inter.length; i++) {
+        var option = document.createElement("option");
+        option.text = inter[i]["game"]+"-"+inter[i]["value"];
+        option.value = inter[i]["id"];
+        x.add(option);
+        
+      } 
+      
+      
+      
+  }
+    
+    
+    
     function autocomplete(inp, arr) {
       /*the autocomplete function takes two arguments,
       the text field element and an array of possible autocompleted values:*/
@@ -144,11 +170,16 @@
       document.addEventListener("click", function (e) {
           closeAllLists(e.target);
           });
+          
     }
     
     
     /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-    autocomplete(document.getElementById("myInput"), counts);
+    autocomplete(document.getElementById("myInput"), games_list);
+    
+    
+    
+    
 
 </script>
 {% endblock %}

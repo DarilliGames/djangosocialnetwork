@@ -40,17 +40,15 @@ class UserRegistrationForm(UserCreationForm):
 
     def save(self, commit=True):
         instance = super(UserRegistrationForm, self).save(commit=False)
-
         if commit:
             instance.save()
-
         return instance
         
         
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('header', 'bio', 'streamkey', 'playing_game')
+        fields = ('header', 'bio', 'streamkey', 'playing_game', 'img_profile')
         
         
 class CharacterProfileForm(forms.ModelForm):

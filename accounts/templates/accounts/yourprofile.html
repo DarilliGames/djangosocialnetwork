@@ -70,7 +70,9 @@
                 <div style="position:absolute; bottom:0px; background-color:rgba(255, 255, 255, 0.4); width:90%">
                     <h4 style="color:black">{{c.character}}</h4>
                     <p style="color:black">{{c.game}}</p>
-                    <p style="color:black">{{c.rank}}</p>
+                    <p style="color:black">{{c.get_rank}}</p>
+                    <p><a href="{% url 'updatecharacter' c.id %}">UPDATE</a></p>
+                    <p><a href="{% url 'setmain' c.id %}">SetMain</a></p>
                 </div>
             </div>
             {% endfor %}

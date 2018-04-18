@@ -1,0 +1,62 @@
+{% extends 'home/base.html' %}
+{% load bootstrap_tags %}
+
+{% block content %}
+
+
+    <div class="row darker">
+        <br>
+        
+            <form id="search" role="search" method="POST" autocomplete="off">
+                {% csrf_token %}
+                <div  class="col-sm-3">
+                <input type="text" class="form-control" style="width:100%;" placeholder="User Name" name="query">
+                </div>
+                <div  class="col-sm-7">
+                    {% for a in attribute %}
+                    {{ a.name }}
+                    <input list="{{ a.name }}" name="{{ a.name }}">
+                      <datalist id="{{ a.name }}">
+                        {% for b in a.attribute.all %}
+                        <option value="{{b.id}}">{{b}}</option>
+                        {% endfor %}
+                      </datalist>
+                    {% endfor %}
+                    
+                </div>
+                <div  class="col-sm-2">
+                <button class="btn btn-light" type="submit">Lets go! <i class="fa fa-search"></i></button>
+                </div>
+            </form>
+        
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-12" style="background-color:white">
+        <table class="table table-hover">
+        <thead>
+        <tr>
+        
+        <th scope="col">Character: </th>
+        <th scope="col">Rank: </th>
+        <th scope="col">About: {% for x in game.attributes.all %}{{x.name}}{% endfor %}</th>
+        <th scope="col">Handle: </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for c in characters %}
+        <tr>
+        <td class="table-light"><a href="{% url 'profile' c.userprofile.id %}">{{c}}</a></td>
+        <td class="table-light"><a href="{% url 'profile' c.userprofile.id %}">{{c.get_rank}}</a></td>
+        <td class="table-light"><a href="{% url 'profile' c.userprofile.id %}">{% for x in c.abouts.all %}{{ x }} {% endfor %}</a></td>
+        <td class="table-light"><a href="{% url 'profile' c.userprofile.id %}">{{c.userprofile}}</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        </div>
+    </div>
+    
+    
+
+{% endblock %}

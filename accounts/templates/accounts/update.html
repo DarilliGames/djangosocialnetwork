@@ -1,7 +1,7 @@
 {% extends "home/base.html" %}
 {% load bootstrap_tags %}
 {% block content %}
-    <form role="form" method="post">
+    <form role="form"  type="multipart/form-data" method="post">
         <legend>Create a new account</legend>
         {% csrf_token %}
         {{ form | as_bootstrap }}

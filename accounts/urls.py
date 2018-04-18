@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^password-reset/', include(urlsreset)),
     url(r'^createcharacter/', create_character, name='createcharacter'),
     url(r'^update/', update_profile, name='updateprofile'),
+    url(r'^updatecharacter/(\d+)', update_character, name='updatecharacter'),
+    url(r'^setmain/(\d+)', set_main, name='setmain'),
 ]

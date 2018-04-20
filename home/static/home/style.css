@@ -1,6 +1,6 @@
 body{
-    padding-top: 70px;
-    background-color: #dbdbdb;
+    padding-top: 50px;
+    background: url('images/body.jpg');
 }
 h1{
     color: #3D3E3D;
@@ -13,6 +13,12 @@ h2{
 h3{
     color: #3D3E3D;
     text-align: center;
+}
+h4{
+  color: #3D3E3D;
+}
+.textwhite{
+  color:#f2f2f2;
 }
 p{
     color: #3D3E3D;
@@ -168,8 +174,13 @@ input[type=submit] {
   color: #ffffff; 
 }
 /*OverRide*/
+.nav{
+  margin-bottom: 0px;
+}
+
 .navbar{
   background-image: none;
+  margin-bottom: 0px;
 }
 
 .navbar-default {

@@ -8,5 +8,14 @@ def get_index(request):
     for x in UserProfile.objects.all():
         if x.is_featured:
             featured.append(x)
-    return render(request, "home/index.html", {"featured":featured})
+            
+    games = Game.objects.all().order_by('-reviews_score')
+    
+        
+    return render(request, "home/index.html", {"featured":featured, "games":games})
+    
+    
+def progress(request):
+    
+    return render(request, "home/progress.html")
     

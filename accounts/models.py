@@ -2,23 +2,30 @@ from django.db import models
 from django.contrib.auth.models import User
 from games.models import *
 
+no_ranks = {0:"No Ranks Available"}
 
-
-league_ranks = { 0:"Unranked", 1:"Bronze 3 or less", 2:"Bronze 1", 3:"Silver 3", 4:"Silver 1", 5:"Gold 3", 6:"Gold 1", 7:"Platinum 3", 8:"Platinum 1", 9:"Diamond 3", 10:"Diamond 1", 11:"Masters", 12:"Challenger"}
+league_ranks = { 0:"Unranked", 1:"Bronze 3 or less", 2:"Bronze 2", 3:"Bronze 1", 4:"Silver 5", 5:"Silver 4", 6:"Silver 3", 7:"Silver 2", 8:"Silver 1", 9:"Gold 5", 10:"Gold 4", 11:"Gold 3", 12:"Gold 2", 13:"Gold 1", 14:"Platinum 5", 15:"Platinum 4", 16:"Platinum 3", 17:"Platinum 2", 17:"Platinum 1", 18:"Diamond 5", 19:"Diamond 4", 20:"Diamond 3", 21:"Diamond 2", 22:"Diamond 1", 23:"Masters", 24:"Challenger"}
 
 wow_ranks = { 0: "Unranked", 1:"<1200", 2:"1200-1600", 3:"1600-1800", 4:"1800-2000", 5:"2000-2200", 6:"2200-2400", 7:"2400-2600", 8:"2600-2800", 9:"2800+"}
 
 # { 0: "Unranked", 1:"", 2:"", 3:"", 4:"", 5:"", 6:"", 7:"", 8:"", 9:"", 10:"", 11:"", 12:""}
 
 
+def updategetrank(game):
+    if game.id == 2:
+        return league_ranks
+    elif game.id == 3:
+        return wow_ranks
+    else:
+        return no_ranks
 
 def rankify(game, rank):
-    if game.id == 1:
+    if game.id == 2:
         return league_ranks[rank]
-    if game.id == 3:
+    elif game.id == 3:
         return wow_ranks[rank]
     else:
-        return str(rank)
+        return no_ranks[rank]
 
 
 
@@ -73,7 +80,7 @@ class AttributeChoices(models.Model):
     character = models.ForeignKey(CharacterProfile, on_delete=models.CASCADE, related_name="abouts")
     
     def __str__(self):
-        return self.name.value
+        return self.character.character+" "+self.name.value+" "+self.character.game.name
     
 
     

@@ -6,7 +6,10 @@ from review.forms import GameReviewForm
 
 def Home(request):
     games = Game.objects.all()
-    return render(request, "games/index.html", {"games":games})
+    gameslist = []
+    for g in games:
+        gameslist.append(g.name)
+    return render(request, "games/index.html", {"games":games, "gameslist":gameslist})
     
 def get_game(request, id):
     game = get_object_or_404(Game, pk=id)

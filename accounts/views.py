@@ -92,13 +92,19 @@ def remove_profile(request, id):
 @login_required()
 def set_main(request, id):
     character = get_object_or_404(CharacterProfile, pk=id)
+    print(character)
+    print("Got Character")
     if request.user == character.userprofile:
-        profile = get_object_or_404(UserProfile, user=request.user)
-        profile.main_character = character
-    profile.save()
+        if request.user.uprofile:
+            profile = request.user.uprofile
+            print(profile)
+            profile.main_character = character
+            profile.save()
+        else:
+            return redirect('updateprofile')
+    print(profile.main_character)
     return redirect("yourprofile")
     
-
 @login_required()
 def update_profile(request):
     if request.method=="POST":
@@ -127,15 +133,16 @@ def update_profile(request):
 def update_character(request, id):
     character = get_object_or_404(CharacterProfile, pk=id)
     game = character.game
+    ranks = updategetrank(game)
     attributes = Attributes.objects.filter(game=game)
-    
     if character.userprofile == request.user:
         if request.method=="POST":
+            character.rank = request.POST.get("rank")
+            character.save()
             for r in attributes:
-                print(r)
-                print(request.POST.get(r.name))
-                result = AttributeChoices.objects.get(name__attribute=r, character=character)
+                result = AttributeChoices.objects.filter(name__attribute=r, character=character)
                 if result:
+                    result = AttributeChoices.objects.get(name__attribute=r, character=character)
                     print("got and saving")
                     result.name = AttributeValue(pk=int(request.POST.get(r.name)))
                 else:
@@ -146,12 +153,10 @@ def update_character(request, id):
                 result.save()
                 
             return redirect('yourprofile')
-        return render(request, "accounts/updatecharacter.html", {"character":character, "attributes":attributes})
-        
-        
-        
+        return render(request, "accounts/updatecharacter.html", {"character":character, "attributes":attributes, "ranks":ranks})
     else:
         return redirect('home')
+        
 @login_required()
 def create_character(request):
     if request.method=="POST":

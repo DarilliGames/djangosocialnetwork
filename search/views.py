@@ -12,8 +12,10 @@ def search(request):
 
 def search_games(request):
     if request.method=="POST":
-        pass
-    return render(request, "search/games.html")
+        games = Game.objects.filter(name__icontains=request.POST.get("query"))
+    else:
+        games = Game.objects.all()
+    return render(request, "search/games.html", {"games":games})
 
 
 
@@ -43,16 +45,15 @@ def search_users(request):
     
 def search_characters(request, id):
     game=get_object_or_404(Game, pk=id)
+    ranks = updategetrank(game)
     attribute=Attributes.objects.filter(game=game)
-    
-    
     if request.method=="POST":
         name_search = request.POST.get("query")
         if name_search != "":
-            characters = CharacterProfile.objects.filter(character__icontains=request.POST.get("query"))
+            characters = CharacterProfile.objects.filter(game=game, character__icontains=request.POST.get("query"))
         else:
             print("YOU HAVE NNNOOOOOO NAME")
-            characters = CharacterProfile.objects.all()
+            characters = CharacterProfile.objects.filter(game=game)
         search_for = []
         values=[]
         results = []
@@ -66,9 +67,8 @@ def search_characters(request, id):
         
         
         if len(values) == 0:
-            
-            print(search_for)
-            print(values)
+            pass
+        
         else:
             results = CharacterProfile.objects.filter(abouts__name__id__in=values)
             data = []
@@ -80,12 +80,12 @@ def search_characters(request, id):
                 results = results.intersection(res)
             
                 
-        return render(request, "search/searchcharacter.html", {"game":game, "characters":results, "attribute":attribute})
+        return render(request, "search/searchcharacter.html", {"game":game, "characters":results, "attribute":attribute, "ranks":ranks})
 
 
 
 
-    return render(request, "search/searchcharacter.html", {"game":game, "attribute":attribute})
+    return render(request, "search/searchcharacter.html", {"game":game, "attribute":attribute, "ranks":ranks})
     
     
     

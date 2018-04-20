@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.views.static import serve
 from django.conf import settings
 
-from home.views import get_index
+from home.views import get_index, progress
 from accounts import urls as accounts_urls
 from follow import urls as follow_urls
 from mbox import urls as mbox_urls
@@ -32,6 +32,7 @@ from search import urls as search_urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', get_index, name="home"),
+    url(r'^progress/', progress, name="progress"),
     url(r'^accounts/', include(accounts_urls)),
     url(r'^follow/', include(follow_urls)),
     url(r'^mail/', include(mbox_urls)),

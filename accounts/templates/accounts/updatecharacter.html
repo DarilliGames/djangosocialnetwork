@@ -6,20 +6,39 @@
         <div class="col-sm-2">
             <h1>{{character}}</h1>
         </div>
-        <div class="col-sm-8">
+    </div>
+    <div class="row">
+        
             <form role="form" method="POST">
                 {% csrf_token %}
-                {% for a in attributes %}
-                    {{ a.name }}
-                    <input list="{{ a.name }}" name="{{ a.name }}">
+                    
+                    {% for a in attributes %}
+                    <div class="col-sm-3">
+                    {{ a.name }}:
+                    <br/>
+                    <input style="border: solid 1px gray; border-radius: 5px" list="{{ a.name }}" name="{{ a.name }}"/>
                       <datalist id="{{ a.name }}">
                         {% for b in a.attribute.all %}
-                        <option value="{{b.id}}">{{b}}</option>
+                        <option value="{{b.id}}">{{b}}</option> 
                         {% endfor %}
                       </datalist>
+                    </div>
                     {% endfor %}
+                    
+                    
+                    <div class="col-sm-3">
+                        Rank:
+                        <br/>
+                    <select id="rank" name="rank" style="border: solid 1px gray; border-radius: 5px"/>
+                        {% for key, values in ranks.items %}
+                        <option value="{{key}}">{{values}}</option>
+                        {% endfor %}
+                    </select>
+                    </div>
+                    <div class="col-sm-2">
                     <input type="Submit" name="Save"/>
+                    </div>
             </form>
-        </div>
+        
     </div>
 {% endblock %}

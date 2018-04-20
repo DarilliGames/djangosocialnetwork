@@ -1,0 +1,161 @@
+{% extends 'home/base.html' %}
+{% load bootstrap_tags %}
+{% block content %}
+
+    <div class="col-sm-6">
+        <h3>Website Features:</h3>
+       
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                    <button style="border:solid gray 1px; width: 100%" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    Accounts
+                    </button>
+                    </h5>
+                </div>
+            
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                <p>Register, Log in, Log Out and Delete your account</p>
+                </div>
+            </div>
+            </div>
+            
+            <div class="card">
+            <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+            <button style="border:solid gray 1px; width: 100%" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            User Profiles
+            </button>
+            </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+            <p>Create a User Profile including a Bio, select a Main Character that will appear on your profile.  Show Case Yourself!  You can of course add more Characters as you like.  There is a little Pop-Up that will show all your Characters. </p>
+            </div>
+            </div>
+            </div>
+            
+            <div class="card">
+            <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+            <button style="border:solid gray 1px; width: 100%" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Games
+            </button>
+            </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+            <p>On the Games' Index you will find a list of games that we keep track of.  Rating are available and are updatable using a modal pop-up, click the stars to add a rating.  Hovering over the stars will show you what rating you will give.</p>
+            <p>Clicking on the "Find your partner" link will bring you to a search site allowing you to discover other players that play that game.</p>
+            </div>
+            </div>
+            </div>
+            
+            <div class="card">
+            <div class="card-header" id="headingFour">
+            <h5 class="mb-0">
+            <button style="border:solid gray 1px; width: 100%" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            Characters
+            </button>
+            </h5>
+            </div>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+            <div class="card-body">
+            <p>Each person on the website can create a nunmber of Characters for different games.  You can then update these characters to show the ingame ranking milestones.  We advice that you ask an admin to "Verify" that the character is yours.  This will dramatically boost your likelyhood to be invited to play games will people your skill and above.</p>
+            <p>You may also select a "Main Character", use this to advertise yourself in whatever game you are looking to play in.  We advise choosing your highest ranking character.</p>
+            </div>
+            </div>
+            </div>
+            
+            <div class="card">
+            <div class="card-header" id="headingFive">
+            <h5 class="mb-0">
+            <button style="border:solid gray 1px; width: 100%" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+            Search
+            </button>
+            </h5>
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+            <div class="card-body">
+            <p>The search feature is something I am very proud of.  Depending on the game you may be looking for one attribute - a Role for example (eg. Healer/Medic) or maybe a position (eg. Top, Middle, Goalkeeper, Jungler), maybe you are looking for a specific team (eg. Horde vs. Alliance)</p>
+            <p>Each game can have 1 to 10 different search criteria depending on the game.  While searching for a perticulary player for a perticular game, we help you narrow it down.</p>
+            </div>
+            </div>
+            </div>
+            
+            
+            
+        </div>
+        
+    </div>
+    
+    <div class="col-sm-6">
+        <h3>Bugs / Progress:</h3>
+        <div id="accordion">
+            
+            <div class="card">
+                <div class="card-header" id="headingTen">
+                    <h5 class="mb-0">
+                    <button style="border:solid gray 1px; width: 100%" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                    To-Do
+                    </button>
+                    </h5>
+                </div>
+            
+            <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordion">
+                <div class="card-body">
+                <ul>
+                    <li>Add more Content</li>
+                    <li>Update Ranking Systems</li>
+                    <li>More Publisher Controls To Games</li>
+                    <li>Add Extra Support to Streamers</li>
+                    
+                </ul>
+                </div>
+            </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header" id="headingEleven">
+                    <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" style="border:solid gray 1px; width: 100%"  data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+                    Working Progress
+                    </button>
+                    </h5>
+                </div>
+            
+            <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>Update Current People Streaming</li>
+                        <li>Update Addition Stream Postings</li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header" id="headingTwelve">
+                    <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" style="border:solid gray 1px; width: 100%"  data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
+                    Bugs
+                    </button>
+                    </h5>
+                </div>
+            
+            <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>Current Build - None</li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+            
+            
+        </div>
+    </div>
+    
+{% endblock %}

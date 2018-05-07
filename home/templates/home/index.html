@@ -17,8 +17,12 @@
     <div class="row">
         <br>
         <div class="col-sm-12">
+            <div class="col-sm-3">
+            <h2>Featured Users</h2>
+            <p>Check out some of our featured Users</p>
+            </div>
             {% for f in featured %}
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <a href="{% url 'profile' f.id %}">
                     <div class="cardout" style="width:100%;">
                         <div class="cardin">
@@ -31,18 +35,66 @@
                             </div>
                             <div style="text-align:center;">
                                 <h3>{{ f.user }}</h3>
-                            
-                                <p style="width: 80px; background-color: gold; padding:5px; margin: 5px; position: relative; bottom: 80px; font-size: 12px; right:0px; border-radius:50%; text-align:center; color: black;"> PREMIUM USER </p>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
             {% endfor %}
-            <h2>Featured Users</h2>
+            
         </div>
-        
-         
+
+    </div>
+    <div class="row">
+        <br>
+        <div class="col-sm-12">
+            <div class="col-sm-3">
+            <h2>Featured Games</h2>
+            <p>Popular and Up and coming games</p>
+            </div>
+            
+            <div class="col-sm-3">
+                <a href="{% url 'game' newgame.id %}">
+                    <div class="cardout" style="width:100%;">
+                        <div class="cardin">
+                            <div>
+                            {% if newgame.img_tall %}
+                            <img src="{{ MEDIA_URL }}{{ newgame.img_tall }}" style="max-width:100%; max-height: 100%"/>
+                            {% else %}
+                            <img src="{{ MEDIA_URL }}images/background.jpg" style="max-width:100%; max-height: 100%"/>
+                            {% endif %}
+                            </div>
+                            <div style="text-align:center;">
+                                <h3>{{ newgame.name }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            {% for f in fgames %}
+            <div class="col-sm-3">
+                <a href="{% url 'profile' f.id %}">
+                    <div class="cardout" style="width:100%;">
+                        <div class="cardin">
+                            <div>
+                            {% if f.img_tall %}
+                            <img src="{{ MEDIA_URL }}{{ f.img_tall }}" style="max-width:100%; max-height: 100%"/>
+                            {% else %}
+                            <img src="{{ MEDIA_URL }}images/background.jpg" style="max-width:100%; max-height: 100%"/>
+                            {% endif %}
+                            </div>
+                            <div style="text-align:center;">
+                                <h3>{{ f.name }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+            
+        </div>
+
     </div>
     
     

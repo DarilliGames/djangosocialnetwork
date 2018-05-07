@@ -9,6 +9,9 @@ def Home(request):
     gameslist = []
     for g in games:
         gameslist.append(g.name)
+        
+    if request.method=="POST":
+        games = Game.objects.filter(name__icontains=request.POST.get("query"))
     return render(request, "games/index.html", {"games":games, "gameslist":gameslist})
     
 def get_game(request, id):

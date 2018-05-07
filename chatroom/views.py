@@ -55,10 +55,12 @@ def PChat(request, id):
     else:
         return redirect("chat")
 
+@login_required()
 def PMessages(request, id):
     chat = PrivateMessage.objects.filter(chatroom=id)
     return render(request, 'chatroom/messages.html', {'chat' : chat})
-    
+
+@login_required()    
 def PPost(request, id):
     chatroom = get_object_or_404(PrivateChat, pk=id)
     if request.method == "POST":

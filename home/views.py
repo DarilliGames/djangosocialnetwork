@@ -10,9 +10,12 @@ def get_index(request):
             featured.append(x)
             
     games = Game.objects.all().order_by('-reviews_score')
+    ngames = Game.objects.all().order_by('-release_date')
+    newgame = ngames[0]
     
+    fgames = [games[0], games[1]]
         
-    return render(request, "home/index.html", {"featured":featured, "games":games})
+    return render(request, "home/index.html", {"featured":featured, "games":games, "newgame":newgame, "fgames":fgames})
     
     
 def progress(request):

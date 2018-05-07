@@ -9,6 +9,12 @@ h1{
 p{
     color: #3D3E3D;
 }
+footer{
+    border-top: solid #c9c9c9 1px;
+}
+.foot{
+    border-top: solid #3D3E3D 3px;
+}
 
 @media only screen and (max-width: 1600px) {
     .overallbody{

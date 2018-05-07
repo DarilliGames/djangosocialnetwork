@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, logout, login
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .models import *
@@ -23,6 +24,7 @@ def Messages(request):
     chat = Chat.objects.all()
     return render(request, 'chatroom/messages.html', {'chat' : chat})
 
+@login_required()
 def PGet(request, id):
     recipient = get_object_or_404(User, pk=id)
     if PrivateChat.objects.filter(creator=recipient, allowed=request.user):
@@ -40,7 +42,7 @@ def PGet(request, id):
         proom.save()
         return redirect(reverse('pchat', args=(proom.id,)))
 
-
+@login_required()
 def PChat(request, id):
     proom = get_object_or_404(PrivateChat, pk=id)
     if request.user == proom.creator or request.user == proom.allowed:

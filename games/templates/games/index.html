@@ -25,15 +25,14 @@
 <div class="row">
    <br/>
       {% for g in games %}
-        <div class="col-sm-2 col-xs-6 gameblock">
-            
+        <div class="col-sm-2 col-xs-6">
+            <div class="gameblock">
                 <h3 class="gametitle"><a href="{% url 'game' g.id %}">{{g}}</a></h3>
             <div class="tohover">
             <img class="hoverover" src="{{ MEDIA_URL }}{{ g.img_thumbnail }}" style="max-height:100%; max-width:100%"/>
             
             
             <div class="overlay">
-                
                     <a href="{% url 'publisher' g.publisher.id %}">{{g.publisher}}</a>
             </div>
             </div>
@@ -52,15 +51,13 @@
                         <p>Not Reviewed Yet</p>
                         {% endif %}
             </div>
-        
+        </div>
         </div>
         {% endfor %}
 
 </div>
     <script>
-   alert("Hello");
     var games_list = {{gameslist|safe}};
-    alert(games_list);
     
     
     

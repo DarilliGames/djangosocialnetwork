@@ -20,6 +20,13 @@ h4{
 .textwhite{
   color:#f2f2f2;
 }
+.footer{
+  background-color: gray;
+  padding: 10px;
+}
+.footertext{
+  text-align: right;
+}
 p{
     color: #3D3E3D;
 }

@@ -21,25 +21,13 @@ def search_games(request):
 
 
 def search_users(request):
-    games=Game.objects.all()
-    gameslist = []
-    for g in games:
-        gameslist.append(g.name)
     if request.method=="POST":
-        results = []
-        game = Game.objects.get(name=request.POST.get("gamequery"))
-        characters = CharacterProfile.objects.filter(character__icontains=request.POST.get("query"))
-        for c in characters:
-            if game != "" or game != None:
-                if c.game.name == game.name:
-                    results.append(c)
-            else:
-                results.append(c)
+        users = User.objects.filter(username__icontains=request.POST.get("query"))
                 
             
-        return render(request, "search/searchusers.html", {"characters":results, "games":gameslist})
+        return render(request, "search/searchusers.html", {"users":users})
     
-    return render(request, "search/searchusers.html", {"games":gameslist})
+    return render(request, "search/searchusers.html")
     
     
     

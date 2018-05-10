@@ -28,6 +28,7 @@ from games import urls as games_urls
 from stream import urls as stream_urls
 from review import urls as review_urls
 from search import urls as search_urls
+from premium import urls as premium_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -41,6 +42,7 @@ urlpatterns = [
     url(r'^search/', include(search_urls)),
     url(r'^stream/', include(stream_urls)),
     url(r'^review/', include(review_urls)),
+    url(r'^premium/', include(premium_urls)),
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT})
 ]
 

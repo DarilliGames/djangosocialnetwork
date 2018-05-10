@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'stream',
     'review',
     'search',
+    'premium',
 ]
 
 MIDDLEWARE_CLASSES = [

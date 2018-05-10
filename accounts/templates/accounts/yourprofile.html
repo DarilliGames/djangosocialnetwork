@@ -8,6 +8,12 @@
                     <div class="col-sm-6" style="padding-bottom:10px">
                         
                         <h2 style="text-align: center"> Hello {{user}}!</h2>
+                        {% if user.uprofile.is_premium %}
+                        <h3>Premium - {{ user.uprofile.premium.expires }}</h3>
+                        <h3>Premium - {{ user.uprofile.premium.express|date:"Dd, m, y" }}</h3>
+                        {% else %}
+                        Regular User
+                        {% endif %}
                         <p style="text-align:center"><a href="{% url 'profile' user.id %}" class="btn btn-success" role="button" aria-pressed="true">View Your Profile</a></p>
                     </div>
                     <div class="col-sm-6" style="padding-bottom:10px; border-left: solid 1px gray">

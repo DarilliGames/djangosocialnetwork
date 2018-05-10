@@ -54,6 +54,7 @@ class UserProfile(models.Model):
     is_streamer = models.BooleanField(default=False)
     streamkey = models.CharField(max_length=100, blank=True)
     is_featured = models.BooleanField(default=False)
+    is_premium = models.BooleanField(default=False)
     join_date = models.DateField(auto_now_add=True)
     last_online = models.DateField(auto_now_add=True)
     main_character = models.OneToOneField(CharacterProfile, null=True, blank=True, on_delete=models.CASCADE, related_name="maincharacter")

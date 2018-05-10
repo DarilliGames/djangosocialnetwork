@@ -1,0 +1,53 @@
+{% extends "home/base.html" %}
+{% load static from staticfiles %}
+{% load bootstrap_tags %}
+
+{% block head_js %}
+    {{ block.super }}
+  <script src="https://js.stripe.com/v2/" type="text/javascript"></script>
+  <script type="text/javascript">
+      //<![CDATA[
+      Stripe.publishableKey = '{{ publishable }}';
+      //]]>
+  </script>
+  <script type="text/javascript" src="{% static 'premium/stripe.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    
+    <h3>You are about to update to Premium Settings</h3>
+    <p>Advantages of Premium inclue -</p>
+    <ul>
+        <li>Faster Character Validation</li>
+        <li>Search List Priority</li>
+        <li>Stream Display Priority</li>
+    </ul>
+    
+
+    <form role="form" method="POST" id="payment-form" action="{% url 'process' %}">
+    
+        <legend>Payment Details</legend>
+        
+        <div id="credit-card-errors" style="display:none">
+            <div class="alert-message block-message error" id="stripe-error-message"></div>
+        </div>
+        
+        <div class="form-group col-md-6">
+            {{ order_form|as_bootstrap }}
+        </div>
+        
+        <div class="form-group col-md-6">
+            {{ payment_form|as_bootstrap }}
+        </div>
+        
+        {% csrf_token %}
+        <div class="form-group col-md-12">
+            <input class="btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
+        </div>
+    
+    </form>
+  
+    
+
+{% endblock %}

@@ -22,3 +22,6 @@ def progress(request):
     
     return render(request, "home/progress.html")
     
+    
+def page_not_found(request):
+    return render(request, "home/404.html")

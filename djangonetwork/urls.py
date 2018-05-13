@@ -30,6 +30,10 @@ from review import urls as review_urls
 from search import urls as search_urls
 from premium import urls as premium_urls
 
+from django.conf.urls import handler404
+
+handler404 = "home.views.page_not_found"
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', get_index, name="home"),

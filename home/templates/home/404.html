@@ -1,0 +1,30 @@
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+{% block content %}
+   
+    <div class="row darker">
+        <h2>Its all an Illusion!</h2>
+    </div>
+    <br>
+    <div class="row">
+        
+    
+    <div class="col-sm-6">
+        <canvas id="gc" width="400" height="400"></canvas>
+    </div>
+    <div class="col-sm-6">
+        <h3>The Page you were going to does not exist</h3>
+        <h4>While you are here - you might as play</h4>
+        <hr/>
+        <h4>Your Score is: <span id="sc">Score</span></h3>
+        <h4>High Score is: <span id="hsc">Score</span></h3>
+        <p>User W, A, S, D to move around.</p>
+    </div>
+    </div>
+    
+    
+    
+    
+    <script src="{% static 'home/game.js' %}"></script>
+    
+{% endblock %}

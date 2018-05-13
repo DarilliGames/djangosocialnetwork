@@ -5,17 +5,26 @@ from games.models import *
 
 def search(request):
     profiles = User.objects.filter(username__icontains=request.GET.get("query"))
+    premium = []
+    for p in profiles:
+        if p.uprofile.is_premium:
+            premium.append(p)
     games = Game.objects.filter(name__icontains=request.GET.get("query"))
     publisher = Publisher.objects.filter(name__icontains=request.GET.get("query"))
     characters = CharacterProfile.objects.filter(character__icontains=request.GET.get("query"))
-    return render(request, "search/search.html", {'profiles':profiles, 'games':games, 'publisher':publisher, "characters":characters})
+    return render(request, "search/search.html", {'premium':premium, 'profiles':profiles, 'games':games, 'publisher':publisher, "characters":characters})
 
 def search_games(request):
+    gameslist = []
+    games = Game.objects.all()
+    for g in games:
+        gameslist.append(g.name)
+       
     if request.method=="POST":
         games = Game.objects.filter(name__icontains=request.POST.get("query"))
     else:
         games = Game.objects.all()
-    return render(request, "search/games.html", {"games":games})
+    return render(request, "search/games.html", {"games":games, "gameslist":gameslist})
 
 
 

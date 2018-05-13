@@ -9,10 +9,7 @@
                         
                         <h2 style="text-align: center"> Hello {{user}}!</h2>
                         {% if user.uprofile.is_premium %}
-                        <h3>Premium - {{ user.uprofile.premium.expires }}</h3>
-                        <h3>Premium - {{ user.uprofile.premium.express|date:"Dd, m, y" }}</h3>
-                        {% else %}
-                        Regular User
+                        <h3>Premium</h3>
                         {% endif %}
                         <p style="text-align:center"><a href="{% url 'profile' user.id %}" class="btn btn-success" role="button" aria-pressed="true">View Your Profile</a></p>
                     </div>
@@ -25,7 +22,7 @@
                         {% endif %}
                         {% if user.uprofile.streamkey %}
                         <h3>Twitch Account:</h3>
-                        <p>{{user.uprofile.streamkey}} <button>Add to Database</button></p>
+                        <p>{{user.uprofile.streamkey}} <a href="{% url 'golive' %}" style="width: 120px" class="btn btn-success" role="button" aria-pressed="true">Go Live</a>
                         {% else %}
                         <a href="{% url 'updateprofile' %}" style="width: 120px" class="btn btn-success" role="button" aria-pressed="true">Twitch account?</a>
                         {% endif %}

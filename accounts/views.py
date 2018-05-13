@@ -113,6 +113,7 @@ def update_profile(request):
             upro = request.user.uprofile
             upro.bio=request.POST.get('bio')
             upro.img_profile=request.POST.get('img_profile')
+            upro.playing_game=Game(pk=request.POST.get('playing_game'))
             upro.streamkey=request.POST.get('streamkey')
             upro.save()
             return redirect("yourprofile")

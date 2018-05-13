@@ -8,9 +8,6 @@ league_ranks = { 0:"Unranked", 1:"Bronze 3 or less", 2:"Bronze 2", 3:"Bronze 1",
 
 wow_ranks = { 0: "Unranked", 1:"<1200", 2:"1200-1600", 3:"1600-1800", 4:"1800-2000", 5:"2000-2200", 6:"2200-2400", 7:"2400-2600", 8:"2600-2800", 9:"2800+"}
 
-# { 0: "Unranked", 1:"", 2:"", 3:"", 4:"", 5:"", 6:"", 7:"", 8:"", 9:"", 10:"", 11:"", 12:""}
-
-
 def updategetrank(game):
     if game.id == 2:
         return league_ranks
@@ -56,7 +53,7 @@ class UserProfile(models.Model):
     is_featured = models.BooleanField(default=False)
     is_premium = models.BooleanField(default=False)
     join_date = models.DateField(auto_now_add=True)
-    last_online = models.DateField(auto_now_add=True)
+    last_online = models.DateField(auto_now=True)
     main_character = models.OneToOneField(CharacterProfile, null=True, blank=True, on_delete=models.CASCADE, related_name="maincharacter")
     img_profile = models.ImageField(upload_to='media', blank=True, null=True)
     

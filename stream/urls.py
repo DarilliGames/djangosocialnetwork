@@ -5,5 +5,6 @@ urlpatterns = [
     url(r'^$', home, name='streams'),
     url(r'^(\d+)', get_stream, name='stream'),
     url(r'^catagory/(\d+)', get_catagory, name='streamcatagory'),
+    url(r'^golive', go_live, name='golive'),
     
 ]

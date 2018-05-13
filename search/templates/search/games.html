@@ -46,28 +46,7 @@
 
     <script>
    
-    var games_list = {{games|safe}};
-    
-    
-    
-    
-    function update_select(){
-      var i;
-      var x = document.getElementById("attribute");
-      
-      for (i = 0; i < inter.length; i++) {
-        var option = document.createElement("option");
-        option.text = inter[i]["game"]+"-"+inter[i]["value"];
-        option.value = inter[i]["id"];
-        x.add(option);
-        
-      } 
-      
-      
-      
-  }
-    
-    
+    var games_list = {{gameslist|safe}};
     
     function autocomplete(inp, arr) {
       /*the autocomplete function takes two arguments,

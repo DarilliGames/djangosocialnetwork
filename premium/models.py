@@ -2,6 +2,7 @@ from django.db import models
 
 from accounts.models import *
 
+import datetime
 
 class Order(models.Model):
     full_name = models.CharField(max_length=50, blank=False)
@@ -12,8 +13,7 @@ class Order(models.Model):
     street_address_1 = models.CharField(max_length=40, blank=False)
     street_address_2 = models.CharField(max_length=40, blank=False)
     county = models.CharField(max_length=40, blank=False)
-    date = models.DateField(auto_now_add=True)
-  
+    date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return "{0}-{1}-{2}".format(self.id, self.date, self.full_name)
@@ -25,11 +25,20 @@ class Premium(models.Model):
     
     def __str__(self):
         return "{0}".format(self.user)
-    
-    def markPremium(self):
+        
+        
+    def markPremium(self, time):
+        self.expires += time
         self.user.is_premium = True
+        self.user.save()
         self.save()
         
+        
     def markNormal(self):
-        self.user.uprofile.is_premium = False
+        if self.expires < datetime.datetime.now():
+            self.user.is_premium = False
+            self.user.save()
         self.save()
+        
+    
+    

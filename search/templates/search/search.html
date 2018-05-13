@@ -22,26 +22,55 @@
         {% endfor %}
     </div>
     {% endif %}
-    {% if profiles %}
+    
+    {% if profiles or premium %}
     <div id="sprofiles" class="row">
         <h1>Users</h1>
-        {% for p in profiles %}
+    
+        <div class="row">
+        <h2>Premium</h2>
+        </div>
+        <div class="row">
+        {% for p in premium|slice:":12" %}
         <div class="col-sm-2">
             <div class="cardout" style="text-align:center">
-                <div style="width:100%; height:180px; background-color:white"></div>
+                {% if p.uprofile.img_profile %}
+                <div style="width:100%; border:solid black 1px;"><img src="{{ MEDIA_URL }}{{ p.uprofile.img_profile }}" style="max-height:100%; max-width:100%"/></div>
+                {% else %}
+                <div style="width:100%; border:solid black 1px;"><img src="{{ MEDIA_URL }}images/background.jpg" style="max-height:100%; max-width:100%"/></div>
+                {% endif %}
+                <h4 class="cardin" style="text-align:center"><a href="{% url 'profile' p.id%}"style="text-align:center">{{p}}</a></h4>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+        <div class="row">
+        <h2>Regular Users</h2>
+        </div>
+        <div class="row">
+        {% for p in profiles|slice:":12" %}
+        <div class="col-sm-2">
+            <div class="cardout" style="text-align:center">
+                {% if p.uprofile.img_profile %}
+                <div style="width:100%; border:solid black 1px;"><img src="{{ MEDIA_URL }}{{ p.uprofile.img_profile }}" style="max-height:100%; max-width:100%"/></div>
+                {% else %}
+                <div style="width:100%; border:solid black 1px;"><img src="{{ MEDIA_URL }}images/background.jpg" style="max-height:100%; max-width:100%"/></div>
+                {% endif %}
                 <h4 class="cardin" style="text-align:center"><a href="{% url 'profile' p.id%}"style="text-align:center">{{p}}</a></h4>
             </div>
         </div>
         {% endfor %}
     </div>
+    </div>
     {% endif %}
+    
     {% if characters %}
     <div id="scprofiles" class="row">
         <h1>Game Characters</h1>
         {% for p in characters %}
         <div class="col-sm-2">
             <div class="cardout" style="text-align:center">
-                <div style="width:100%; height:180px; background-color:white"></div>
+                <div style="width:100%; height:180px;"><img src="{{ MEDIA_URL }}{{ p.game.img_thumbnail }}" style="max-height:100%; max-width:100%"/></div>
                 <h4 class="cardin" style="text-align:center"><a href="{% url 'profile' p.id%}"style="text-align:center">{{p}}</a></h4>
             </div>
         </div>

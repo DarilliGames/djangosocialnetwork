@@ -4,6 +4,7 @@
 {% block content %}
 <row>
     <div class="col-sm-12 cardout">
+        {% if streams %}
         {% for s in streams %}
         <div class="col-sm-3 cardout">
             <div>
@@ -21,6 +22,9 @@
             
             </div></div></div></a>
         {% endfor %}
+        {% else %}
+        <h3>There are No Streams On-Line</h3>
+        {% endif %}
     </div>
 </row>
 {% endblock %}

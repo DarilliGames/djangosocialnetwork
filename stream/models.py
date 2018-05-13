@@ -6,6 +6,7 @@ class Stream(models.Model):
     streamkey = models.CharField(max_length=100, blank=False, default="darilli")
     game = models.ForeignKey(Game)
     featured = models.BooleanField(default=False)
+    is_online = models.BooleanField(default=False)
     
     def __str__(self):
         return self.streamer.username

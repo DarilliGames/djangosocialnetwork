@@ -1,6 +1,8 @@
 {% extends 'home/base.html' %}
 {% load bootstrap_tags %}
+{% load staticfiles %}
 {% block content %}
+
     
         <div class="row darker">
         
@@ -34,6 +36,8 @@
                 <p>
                 {% if person.is_staff %}
                 Website Administrator
+                {% elif person.uprofile.is_premium %}
+                Premium
                 {% else %}
                 Regular User
                 {% endif %}
@@ -42,22 +46,11 @@
                 </div>
             </div>
             <div class="col-sm-4">
-                
-            </div>
-    
-        
-        </div>
-
-   
-    
-    <div class="row">
-        <div class="col-sm-4">
-            <h3>Characters</h3>
-            {% if person.uprofile.main_character %}
+              {% if person.uprofile.main_character %}
             
             
-            <div class="col-sm-12" style="height:200px; max-width: 200px; background-image: url('{{MEDIA_URL}}{{ person.uprofile.main_character.game.img_thumbnail }}'); background-repeat: no-repeat; background-size: 100% 100%;">
-                <div style="position:absolute; bottom:0px; background-color:rgba(255, 255, 255, 0.4); width:90%">
+            <div style="margin:auto; text-align:center; height:200px; width: 200px; background-image: url('{{MEDIA_URL}}{{ person.uprofile.main_character.game.img_thumbnail }}'); background-repeat: no-repeat; background-size: 100% 100%;">
+                <div style="margin:auto; position: absolute; bottom:20px; background-color:rgba(255, 255, 255, 0.4); text-align:center; width:200px">
                     <h4 style="color:black">{{person.uprofile.main_character.character}}</h4>
                     <p style="margin: 0px; color:black">{{person.uprofile.main_character.game}}</p>
                     <p style="margin: 0px; color:black">{{person.uprofile.main_character.get_rank}}</p>
@@ -71,10 +64,44 @@
             
             <br/>
             {% endif %}
-            <p><a data-toggle="modal" data-target="#characters"> See All Characters </a></p>
-            <br>
+            </div>
+    
+        
         </div>
+
+   
+    
+    <div class="row">
         <div class="col-sm-8">
+          <div class="row" style="text-align:center; content-align: center">
+            <h3>Characters</h3>
+            
+            {% for c in person.cprofile.all|slice:"3" %}
+            
+            <div class="col-sm-4 col-xs-offset-1 col-xs-10" style="padding:10px">
+              <div class="toalign" style="background-image: url('{{MEDIA_URL}}{{ c.game.img_thumbnail }}'); background-repeat: no-repeat; background-size: 100% 100%;">
+                  <div style="position:absolute; bottom:10px; background-color:rgba(255, 255, 255, 0.4); width:90%">
+                      <h4 style="color:black">{{ c }}</h4>
+                      <p style="margin: 0px; color:black">{{ c.game}}</p>
+                      <p style="margin: 0px; color:black">{{ c.get_rank }}</p>
+                      <p style="margin: 0px; color:black">{% for x in c.abouts.all %}
+                        {{ x.name }}
+                      {% endfor %}</p>
+                  </div>
+              </div>
+            </div>
+            {% endfor %}
+            
+            <br/>
+            
+            </div>
+            <div class="row" style="text-align:center">
+            <p><a data-toggle="modal" data-target="#characters"> See All Characters </a></p>
+            </div>
+            <br>
+          </div>
+       
+        <div class="col-sm-4">
             <h3>Posts</h3>
             <div class="col-sm-6">
             
@@ -169,5 +196,7 @@
     </div>
   </div>
 </div>
-    
+
+
+<script src="{% static 'home/align.js' %}"></script>
 {% endblock content %}
